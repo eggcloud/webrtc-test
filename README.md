@@ -1,14 +1,14 @@
 # webrtc-test
 Framework for functional and Load Testing of WebRTC
 
-## Install prerequisites ##
-### CentOS 7 (Janus) ###
+## Install prerequisites
+#### CentOS 7
 * Install janus: https://github.com/meetecho/janus-gateway
 * Install python utilities: `pip install psutil matplotlib`
 
-### Ubuntu 16.04 (Selenium) ###
+#### Ubuntu 16.04
 * Install chrome: 
-```
+```bash
 $ wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 $ sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 $ sudo apt-get update
@@ -19,9 +19,9 @@ $ sudo apt-get install google-chrome-stable
 * Install pytest:  `pip install pytest pytest-xdist pytest-rerunfailures`
 
 ## Initiate load tests ##
-### 1. Start monitoring ###
+#### 1. Start monitoring
 * on CentOS
-```
+```python
 # psmon.sh
 
 import sys
@@ -35,9 +35,9 @@ if __name__ == '__main__':
 ```
 `$ psmon.sh <PID> --log <FILENAME> --plot <FILENAME> --interval <SECS> --duration <SECS>`
  
-### 2. Run webtest ###
+#### 2. Run webtest
 * on Ubuntu
-```
+```python
 # webtest.py
 
 from selenium import webdriver
@@ -59,7 +59,7 @@ driver.find_element_by_id("start").click()
 ```
 `$ py.test -n <numprocesses> webtest.py`
 
-### 3. End monitoring ###
+#### 3. End monitoring
 * Terminate process with **<CTRL+C>** on CentOS
 * Log files generation and test results recording
 
@@ -67,6 +67,8 @@ driver.find_element_by_id("start").click()
 ![pslog.txt](images/pslog_txt.png)
 ![pslog.png](images/pslog.png)
 
-## GStreamer (with janus streaming plugin)
+<hr/>
+
+### GStreamer (with janus streaming plugin)
 * Install gstreamer: `$ yum install gstreamer1*`
 * Start gstreamer: `$ /opt/janus/share/janus/streams/test_gstreamer_1.sh`
