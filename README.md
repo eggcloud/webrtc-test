@@ -64,10 +64,8 @@ driver.find_element_by_id("start").click()
 * Log files generation and test results recording
 
 ## Analyze the results ##
-![pslog.txt](https://github.com/softsheep/webrtc-test/images/pslog_txt.png)
-![pslog.png](https://github.com/softsheep/webrtc-test/images/pslog.png)
-![htop](https://github.com/softsheep/webrtc-test/images/htop.png)
-![proc/interrupts](https://github.com/softsheep/webrtc-test/images/interrupts.png)
+![pslog.txt](images/pslog_txt.png)
+![pslog.png](images/pslog.png)
 
 ## GStreamer (with janus streaming plugin)
 * Install gstreamer: `$ yum install gstreamer1*`
