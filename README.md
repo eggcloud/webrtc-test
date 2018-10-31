@@ -64,6 +64,7 @@ driver.find_element_by_id("start").click()
 * Log files generation and test results recording
 
 ## Analyze the results ##
+a quad core CPU with 8GB RAM
 ![pslog.txt](images/pslog_txt.png)
 ![pslog.png](images/pslog.png)
 
