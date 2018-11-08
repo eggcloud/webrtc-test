@@ -73,3 +73,32 @@ a quad core CPU with 8GB RAM, 640x480 1Mbits/s
 ### GStreamer (with janus streaming plugin)
 * Install gstreamer: `$ yum install gstreamer1*`
 * Start gstreamer: `$ /opt/janus/share/janus/streams/test_gstreamer_1.sh`
+```sh
+#!/bin/sh
+gst-launch-1.0 \
+  audiotestsrc ! \
+    audioresample ! audio/x-raw,channels=1,rate=16000 ! \
+    opusenc bitrate=20000 ! \
+      rtpopuspay ! udpsink host=127.0.0.1 port=5002 \
+  videotestsrc ! \
+    video/x-raw,width=320,height=240,framerate=15/1 ! \
+    videoscale ! videorate ! videoconvert ! timeoverlay ! \
+    vp8enc error-resilient=1 ! \
+      rtpvp8pay ! udpsink host=127.0.0.1 port=5004
+```
+* Janus streaming plugin configuration: `$ cat /opt/janus/etc/janus/janus.plugin.streaming.cfg`
+```
+[gstreamer-sample]
+type = rtp
+id = 1
+description = Opus/VP8 live stream coming from gstreamer
+audio = yes
+video = yes
+audioport = 5002
+audiopt = 111
+audiortpmap = opus/48000/2
+videoport = 5004
+videopt = 100
+videortpmap = VP8/90000
+secret = adminpwd
+```
