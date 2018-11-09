@@ -64,15 +64,18 @@ driver.find_element_by_id("start").click()
 * Log files generation and test results recording
 
 ## Analyze the results ##
-a quad core CPU with 8GB RAM, 640x480 1Mbits/s
+A quad core CPU with 8GB RAM, 640x480 1Mbits/s
 ![pslog.txt](images/pslog_txt.png)
 ![pslog.png](images/pslog.png)
 
 <hr/>
 
-### GStreamer (with janus streaming plugin)
+## RTP rebroadcaster
+![rtp_rebroadcaster.png](images/rtp_rebroadcaster.png)
+
+#### GStreamer
 * Install gstreamer: `$ yum install gstreamer1*`
-* Start gstreamer: `$ /opt/janus/share/janus/streams/test_gstreamer_1.sh`
+* Start gstreamer: `$ test_gstreamer_1.sh`
 ```sh
 #!/bin/sh
 gst-launch-1.0 \
@@ -86,7 +89,36 @@ gst-launch-1.0 \
     vp8enc error-resilient=1 ! \
       rtpvp8pay ! udpsink host=127.0.0.1 port=5004
 ```
-* Janus streaming plugin configuration: `$ cat /opt/janus/etc/janus/janus.plugin.streaming.cfg`
+
+#### Janus videoroom plugin (with RTP Forwarding)
+* janus.plugin.videoroom.cfg
+```
+[1234]
+description = Demo Room
+secret = adminpwd
+publishers = 1
+bitrate = 128000
+fir_freq = 10
+;audiocodec = opus
+;videocodec = vp8
+record = false
+```
+* rtp_forward request
+```json
+{ 
+    "request" : "rtp_forward", 
+    "room" : 1234, 
+    "publisher_id" : 1273744074119261, 
+    "host" : "127.0.0.1", 
+    "audio_port" : 5002, 
+    "video_port" : 5004, 
+    "data_port" : 5000, 
+    "secret" : "adminpwd"
+}
+```
+
+#### Janus streaming plugin
+* janus.plugin.streaming.cfg
 ```
 [gstreamer-sample]
 type = rtp
