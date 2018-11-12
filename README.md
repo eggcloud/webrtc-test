@@ -67,8 +67,8 @@ driver.find_element_by_id("start").click()
 
 ## Analyze the results ##
 A quad core CPU with 8GB RAM, 640x480 1Mbits/s
-![pslog.txt](images/pslog_txt.png)
-![pslog.png](images/pslog.png)
+![pslog1.txt](images/pslog1_txt.png)
+![pslog1.png](images/pslog1.png)
 
 <hr/>
 
