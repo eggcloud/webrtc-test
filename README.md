@@ -1,6 +1,8 @@
 # webrtc-test
 Framework for functional and Load Testing of WebRTC
 
+![selenium-webload.png](images/selenium-webload.png)
+
 ## Install prerequisites
 #### CentOS 7
 * Install janus: https://github.com/meetecho/janus-gateway
